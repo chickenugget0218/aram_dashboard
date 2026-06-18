@@ -450,22 +450,25 @@ with tab_dash:
                 ),
             )
 
-            # 도넛 바깥쪽으로 빠지는 가이드 호
-            ticks = base.mark_arc(
-                innerRadius=92, outerRadius=110,
-                stroke="#bbb", strokeWidth=1, fill=None,
-            )
-
-            # 가이드 호 끝에 라벨 (업체명 + 비중)
+            # 도넛 바깥에 라벨 (업체명 + 비중)
             labels = base.mark_text(
-                radius=125, fontSize=12,
+                radius=110,             # ← 도넛 외경(90)보다 크게
+                fontSize=12,
+                fontWeight="bold",
             ).encode(
                 text="라벨:N",
-                color=alt.value("#333"),
+                color=alt.Color(        # 라벨 색도 업체 색과 통일
+                    "업체:N",
+                    scale=alt.Scale(
+                        domain=list(COMPANY_COLORS.keys()),
+                        range=list(COMPANY_COLORS.values()),
+                    ),
+                    legend=None,
+                ),
             )
 
-            donut = (arc + ticks + labels).properties(
-                width=320, height=320,
+            donut = (arc + labels).properties(
+                width=380, height=380,
             )
             st.altair_chart(donut, use_container_width=False)
 
@@ -620,7 +623,9 @@ with tab_upload:
                 fail += 1
             progress.progress((idx + 1) / len(files),
                               text=f"{idx + 1}/{len(files)} 처리 중...")
-   
+        progress.empty()
+        invalidate_cache()
+        st.success(f"완료: 성공 {ok}건 · 실패 {fail}건")
    
 # ----------------------------------------------------------------------
 # 💰 매출 이력 (RDB 표 조회)
