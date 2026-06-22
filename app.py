@@ -391,10 +391,11 @@ with tab_dash:
                                 text=alt.Text("판매금액:Q", format=","),
                             )
                             st.altair_chart(
-                                alt.layer(bar, text).properties(height=240),
+                                alt.layer(bar, text).properties(height=280),
                                 use_container_width=True,
                             )
-
+             # 행 사이 여백
+            st.write("")
     # ----- 오른쪽: 도넛 + 공지 + 미납 -----
     with main_right:
         st.subheader("전체 비중")
