@@ -266,15 +266,20 @@ def invalidate_cache():
 # ======================================================================
 # 헤더
 # ======================================================================
-title_col, btn_col = st.columns([6, 1], vertical_alignment="center")
+title_col, date_col, btn_col = st.columns([4, 3, 1], vertical_alignment="bottom")
 with title_col:
     st.title("아람비즈 가는길")
-    st.subheader(today)
+with date_col:
+    st.markdown(
+        f"<div style='font-size:24px; font-weight:600; color:#444; "
+        f"padding-bottom:8px'>{today}</div>",
+        unsafe_allow_html=True,
+    )
 with btn_col:
     if st.button("🔄 새로고침"):
         invalidate_cache()
         st.rerun()
-
+        
 monthly_df = fetch_monthly()
 daily_df = fetch_daily()
 TARGETS = fetch_targets()
