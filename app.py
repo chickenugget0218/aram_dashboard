@@ -21,6 +21,10 @@ import pandas as pd
 import altair as alt
 import streamlit as st
 from supabase import create_client
+from zoneinfo import ZoneInfo
+
+# 날짜 
+today = datetime.now(ZoneInfo("Asia/Seoul")).strftime("%Y년 %m월 %d일")
 
 st.set_page_config(page_title="판매 대시보드", page_icon="📊", layout="wide")
 
@@ -38,7 +42,7 @@ def check_password():
     if st.session_state.get("auth_ok"):
         return True
 
-    st.title("🔒 아람비즈 가는길")
+    st.title("🔒 아람비즈 가는길") 
     st.caption("접근 비밀번호를 입력하세요.")
     pw = st.text_input("비밀번호", type="password",
                        label_visibility="collapsed")
@@ -265,6 +269,7 @@ def invalidate_cache():
 title_col, btn_col = st.columns([6, 1], vertical_alignment="center")
 with title_col:
     st.title("아람비즈 가는길")
+    st.subheader(today)
 with btn_col:
     if st.button("🔄 새로고침"):
         invalidate_cache()
