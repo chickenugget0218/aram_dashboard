@@ -79,8 +79,8 @@ COMPANY_COLORS = {n: PALETTE[i % len(PALETTE)] for i, n in enumerate(COMPANIES)}
 
 COMPANY_CODES = {
     "LG생활건강": "lg", "비알코리아": "br", "에너자이저": "energizer",
-    "라벨리": "labelly", "메디카": "medica", "남양유업": "namyang",
-    "나사라": "nasara", "삼립": "samlip", "티젠": "tjeen",
+    "라벨리": "lavelee", "메디카": "medica", "남양유업": "namyang",
+    "나사라": "nasara", "삼립": "samlip", "티젠": "teazen",
 }
 
 SELECTED_CODES = {
