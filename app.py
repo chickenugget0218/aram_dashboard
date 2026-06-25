@@ -24,7 +24,7 @@ from supabase import create_client
 from zoneinfo import ZoneInfo
 
 # 날짜 
-today = datetime.now(ZoneInfo("Asia/Seoul")).strftime("%Y년 %m월 %d일")
+today = datetime.datetime.now(ZoneInfo("Asia/Seoul")).strftime("%Y년 %m월 %d일")
 
 st.set_page_config(page_title="판매 대시보드", page_icon="📊", layout="wide")
 
