@@ -98,13 +98,19 @@ def app_dir() -> str:
 BASE = app_dir()
 LOGO_DIR = os.path.join(BASE, "logo")
 
-
+# 로고 
+@st.cache_data(ttl=3600)   # 1시간 캐시 (이미지는 잘 안 바뀜)
 def logo_for(company: str):
-    for ext in (".png", ".jpg", ".jpeg", ".webp"):
-        p = os.path.join(LOGO_DIR, f"{company}{ext}")
-        if os.path.exists(p):
-            return p
-    return None
+    """Supabase Storage(logos 버킷)에서 로고 URL을 가져옴."""
+    code = COMPANY_CODES.get(company)
+    if not code:
+        return None
+    try:
+        # Public 버킷이라 URL만 반환 (Streamlit이 알아서 다운로드)
+        url = sb.storage.from_("logos").get_public_url(f"{code}.png")
+        return url
+    except Exception:
+        return None
 
 
 def safe_path(s: str) -> str:
