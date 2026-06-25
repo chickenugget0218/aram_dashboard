@@ -266,13 +266,13 @@ def invalidate_cache():
 # ======================================================================
 # 헤더
 # ======================================================================
-title_col, date_col, btn_col = st.columns([4, 3, 1], vertical_alignment="bottom")
+title_col, btn_col = st.columns([7, 1], vertical_alignment="bottom")
 with title_col:
-    st.title("아람비즈 가는길")
-with date_col:
     st.markdown(
-        f"<div style='font-size:24px; font-weight:600; color:#444; "
-        f"padding-bottom:8px'>{today}</div>",
+        f"<div style='display:flex; align-items:baseline; gap:15px'>"
+        f"<span style='font-size:2.5rem; font-weight:700'>아람비즈 가는길</span>"
+        f"<span style='font-size:24px; font-weight:600; color:#444'>{today}</span>"
+        f"</div>",
         unsafe_allow_html=True,
     )
 with btn_col:
